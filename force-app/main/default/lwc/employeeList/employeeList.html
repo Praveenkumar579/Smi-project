@@ -1,0 +1,20 @@
+<template>
+    <lightning-card>
+        <div class="slds-m-around_small">
+            <div>
+                <c-employee-search> onsearch={handleEvent} </c-employee-search>
+                </div>
+                    <div>
+                    <template if:true={employeeRecords}>
+                        <div class="slds-grid slds-wrap">
+                            <template for:each={employeeRecords} for:item="item">
+                                <div class="slds-col slds-size_1-of-3" key={item.Id}>
+                                    <c-employee-record employee-record={item} onemployeeview={handleEmployeeView}></c-employee-record>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+        </div>
+    </lightning-card>
+</template>

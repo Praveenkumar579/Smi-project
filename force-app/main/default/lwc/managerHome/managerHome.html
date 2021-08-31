@@ -1,0 +1,48 @@
+<template>
+    <lightning-tabset variant="scoped">
+        <lightning-tab label="Mentor and Employee">
+            <lightning-record-edit-form object-api-name="Mentor">
+            </lightning-record-edit-form>
+        </lightning-tab>
+        <lightning-tab label="User Enrollment">
+            <lightning-card title="User Enrollment"
+                icon-name="standard:groups">
+                <div class="slds-m-around_small">
+                    <lightning-record-form       
+                        object-api-name={objectApiName}
+                        layout-type="Full"
+                        columns="2"
+                        onsuccess={handleSuccess}
+                    >
+                    </lightning-record-form>
+                </div>
+            </lightning-card>
+        </lightning-tab>
+        <lightning-tab label="Onboarding Step">
+            <lightning-card title="Onboarding Step"
+                icon-name="standard:steps">
+                <div class="slds-m-around_small">
+                    <lightning-record-form       
+                        object-api-name={objectApiStep}
+                        layout-type="Full"
+                        columns="2"
+                        onsuccess={handleSuccess}
+                    >
+                    </lightning-record-form>
+                </div>
+            </lightning-card>
+            <lightning-card>
+                <div align='right'> 
+                    <a class="slds-button slds-button_brand"  href="/lightning/o/Onboarding_Step__c/new?count=1&nooverride=1&useRecordTypeCheck=1&navigationLocation=LIST_VIEW&uid=163024107997258264&backgroundContext=%2Flightning%2Fo%2FOnboarding_Step__c%2Flist%3FfilterName%3DRecent&recordTypeId=0129D000000wWc8QAE" >Add Business Task&nbsp;</a>
+                    <a class="slds-button slds-button_brand"  href="/lightning/o/Onboarding_Step__c/new?count=1&nooverride=1&useRecordTypeCheck=1&navigationLocation=LIST_VIEW&uid=163024431199889955&backgroundContext=%2Flightning%2Fo%2FOnboarding_Step__c%2Flist%3FfilterName%3DRecent&recordTypeId=0129D000000wWcDQAU" >Add Sales and Marketing task</a>
+                </div>
+                <div class="slds-box slds-theme_shade">  
+                    <b>Onboarding Step</b>
+                    <lightning-button class='slds-float_right' label=" Add Sales and Marketing Step" onclick={navigateToBusiness}>&emsp; &emsp;  </lightning-button>  
+                    <lightning-button class='slds-float_right' label="Add Business Step" onclick={navigateTosales}> </lightning-button>
+                
+                </div>  
+            </lightning-card>
+        </lightning-tab>
+    </lightning-tabset>
+</template>

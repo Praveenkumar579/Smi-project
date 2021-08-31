@@ -1,0 +1,30 @@
+<template>
+    <template if:true={employeeRecord}>
+        <lightning-card title ={employeeRecord.Name} icon-name="standard:people">
+            <div slot="actions">
+               <lightning-button-icon
+                    icon-class="employee-record-button"
+                    variant="bare"
+                    alternative-text="Open record"
+                    onclick={handleOpenRecordClick}>
+                </lightning-button-icon>
+            </div>
+            
+            <div class="slds-var-m-around_small">     
+                <lightning-card>
+                <p> 
+                    <strong>Employee ID:  </strong>    {employeeRecord.Name} <br/>
+                    <strong>Employee Name :  </strong> {employeeRecord.Employee__c} </br>
+                    <strong>Mentor :  </strong> {employeeRecord.Mentor__c}
+
+                </p>
+
+                <p class="slds-var-m-around_small">
+                    <lightning-button label="Details" variant="brand" onclick={handleDetails}></lightning-button>
+                </p>
+                </lightning-card>   
+            </div>
+       
+        </lightning-card>
+    </template>
+</template>
