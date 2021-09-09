@@ -4,34 +4,26 @@
             <lightning-card>
                 <div class="slds-m-around_small">
                     <div>
-                        <c-employee-search> onsearch={handleEvent} </c-employee-search>
+                        <c-employee-search onsearch={handleEvent}>  </c-employee-search>
                         </div>
                             <div>
-                            <template if:true={employeeRecords}>
+                                <template if:true={employeeRecords}>
                                 <div class="slds-grid slds-wrap">
-                                    <template for:each={employeeRecords} for:item="item">
+                                <template for:each={employeeRecords} for:item="item">
+                                        
                                         <div class="slds-col slds-size_1-of-3" key={item.Id}>
-                                            <c-employee-record employee-record={item} onemployeeview={handleEmployeeView}></c-employee-record>
+                                            <div class="slds-p-right_x-small">
+                                                <div class="slds-p-top_x-small">
+                                                    <c-employee-data employee-record={item} onemployeeview={handleEmployeeView}></c-employee-data>
+                                                </div>
+                                            </div>
                                         </div>
                                     </template>
                                 </div>
-                            </template>
-                        </div>
-                </div>
-            </lightning-card>
-        </lightning-tab>
-        <lightning-tab label="User Enrollment">
-            <lightning-card title="User Enrollment"
-                icon-name="standard:groups">
-                <div class="slds-m-around_small">
-                    <lightning-record-form       
-                        object-api-name={objectApiName}
-                        layout-type="Full"
-                        columns="2"
-                        onsuccess={handleSuccess}
-                    >
-                    </lightning-record-form>
-                </div>
+            
+                                </template>
+                            </div>
+                </div>            
             </lightning-card>
         </lightning-tab>
         <lightning-tab label="Onboarding Step">
@@ -47,18 +39,6 @@
                     </lightning-record-form>
                 </div>
             </lightning-card>
-            <lightning-card>
-                <div align='right'> 
-                    <a class="slds-button slds-button_brand"  target="_self" href="/lightning/o/Onboarding_Step__c/new?count=1&nooverride=1&useRecordTypeCheck=1&navigationLocation=LIST_VIEW&uid=163024107997258264&backgroundContext=%2Flightning%2Fo%2FOnboarding_Step__c%2Flist%3FfilterName%3DRecent&recordTypeId=0129D000000wWc8QAE" >Add Business Task&nbsp;</a>
-                    <a class="slds-button slds-button_brand" target="_self" href="/lightning/o/Onboarding_Step__c/new?count=1&nooverride=1&useRecordTypeCheck=1&navigationLocation=LIST_VIEW&uid=163024431199889955&backgroundContext=%2Flightning%2Fo%2FOnboarding_Step__c%2Flist%3FfilterName%3DRecent&recordTypeId=0129D000000wWcDQAU" >Add Sales and Marketing task</a>
-                </div>
-                <div class="slds-box slds-theme_shade">  
-                    <b>Onboarding Step</b>
-                    <lightning-button class='slds-float_right' label=" Add Sales and Marketing Step" onclick={navigateToBusiness}>&emsp; &emsp;  </lightning-button>  
-                    <lightning-button class='slds-float_right' label="Add Business Step" onclick={navigateTosales}> </lightning-button>
-                </div>  
-            </lightning-card>
-        
         </lightning-tab>
     </lightning-tabset>   
 </template>

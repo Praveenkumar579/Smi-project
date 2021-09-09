@@ -1,8 +1,10 @@
 import { NavigationMixin } from 'lightning/navigation';
 import { LightningElement, track, wire, api } from 'lwc';
 import searchEmployee from '@salesforce/apex/employeeController.searchEmployee';
+
 export default class MentorHome extends NavigationMixin(LightningElement) {
     @track employeeRecords;
+    @api recordId;
     @track errors;
 
     @wire(searchEmployee)
@@ -35,45 +37,32 @@ export default class MentorHome extends NavigationMixin(LightningElement) {
             this.employeeRecords = undefined;
             
         })
+   
     }
 
-     handleEmployeeView(event) {
+    handleEmployeeView(event) {
+        const employeeId = event.detail;
 		
-		const employeeName = event.detail.value;
 		
 		this[NavigationMixin.Navigate]({
-			type: 'standard__recordPage',
+            type: 'standard__objectPage',
 			attributes: {
-				objectApiName: 'User_Functional_Role__c',
-				actionName: 'view',
-			},
+				recordId: employeeId,
+				objectApiName: 'User_Assigned_Task__c',
+				actionName: 'list',
+			}
 		});
 	}
-    // to add onboarding step for business
-    navigateToBusiness() {
-        this[NavigationMixin.Navigate]({
-            type: 'standard_recordpage',
-            attributes: {
-                recordId: '0129D000000wWc8QAE',
-                objectApiStep: 'User_Functional_Role__c',
-                mode: 'view'
-            }
-        });
-    }
-    navigateTosales() {
-        this[NavigationMixin.Navigate]({
-            type: 'standard__recordPage',
-            attributes: {
-                recordId: '0129D000000wWcDQAU',
-                objectApiStep: 'User_Functional_Role__c',
-                mode: 'view'
-            }
-        });
-    }
-    @api objectApiName = "User_Functional_Role__c";
-    @api objectApiStep = "Functional_Onboarding_Step__c";
+    @api objectApiStep = "Onboarding_Step__c";
 
     handleSuccess(){
-    alert('Record Created !!');
-}
+        const toast = new ShowToastEvent({
+            'title' : 'Created',
+            "message" : 'Record Created Successfully',
+            "variant" : "success",
+            
+        });
+        this.dispatchEvent(toast);
+    }
+
 }
