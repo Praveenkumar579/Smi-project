@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="Onboarding Steps " icon-name="standard:key_dates">
+        <div class="slds-m-around_medium">
+           <template if:true={onboarding.data}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={onboarding.data}
+                    hide-checkbox-column="true"
+                    columns={columns}
+                    onsave={handleSave}
+                    draft-values={draftValues}
+                > 
+            </lightning-datatable>
+                       
+               
+            </template>
+        </div>
+        </lightning-card>
+    </template>
