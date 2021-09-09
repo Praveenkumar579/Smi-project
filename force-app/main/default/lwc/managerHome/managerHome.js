@@ -1,57 +1,59 @@
 import { LightningElement, wire, track, api  } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
-import getContactsApex from '@salesforce/apex/mangerController.getContacts'
-import getemployeeApex from '@salesforce/apex/MentorProfile.getContacts'
-
-
+import searchMentor from '@salesforce/apex/mentorController.searchMentor';
 export default class managerHome extends NavigationMixin(LightningElement) {
-    @wire(getContactsApex) wiredContacts1; //These will be automatically available if successful
-    getContactsFromSalesforce() {
-        getContactsApex()
-        .then(contacts => {
-            //console.log(JSON.stringify(contacts))
-            console.log('Got Contacts: ' + contacts.length);
+    @track mentorRecords;
+    @track errors;
+
+
+    @wire(searchMentor)
+        wiredRecords({error, data}){
+            console.log('Data', data);
+            this.mentorRecords =data;
+            this.errors = error;
+        }
+
+    handleEvent(event)
+    {
+        const eventVal = event.detail;
+        console.log('Search Param',eventVal);
+        searchMentor({
+        searchParam : eventVal
+    
         })
-        .catch(error => {
-            console.log(error)
-        });
-    }
-    @wire(getemployeeApex) wiredContacts;
-    getContactsFromSalesforce() {
-        getemployeeApex()
-        .then(employee => {
-            //console.log(JSON.stringify(contacts))
-            console.log('Got Contacts: ' + employee.length);
+    
+        .then(result => {
+    
+            console.log('Mentor Record', result);
+            this.mentorRecords = result;
+            this.errors = undefined;
+                
         })
-        .catch(error => {
-            console.log(error)
-        });
+    
+        .catch(error =>{
+    
+            console.log('Error',error);
+            this.errors = error;
+            this.mentorRecords = undefined;
+                
+            })
     }
-    // to add onboarding step for business
-    navigateToBusiness() {
-        this[NavigationMixin.Navigate]({
-            type: 'standard_recordpage',
-            attributes: {
-                recordId: '0129D000000wWc8QAE',
-                objectApiStep: 'User_Functional_Role__c',
-                mode: 'view'
-            }
-        });
-    }
-    navigateTosales() {
-        this[NavigationMixin.Navigate]({
-            type: 'standard__recordPage',
-            attributes: {
-                recordId: '0129D000000wWcDQAU',
-                objectApiStep: 'User_Functional_Role__c',
-                mode: 'view'
-            }
-        });
-    }
+
+
+    handleMentorView() {
+		this[NavigationMixin.Navigate]({
+			type: 'standard__objectPage',
+			attributes: {
+				objectApiName: 'User_Functional_Role__c',
+				actionName: 'list',
+			}
+		});
+	}
     @api objectApiName = "User_Functional_Role__c";
-    @api objectApiStep = "Functional_Onboarding_Step__c";
+    @api objectApiStep = "Onboarding_Step__c";
 
     handleSuccess(){
     alert('Record Created !!');
+    eval("$A.get('e.force:refreshView').fire();");
 }
 }

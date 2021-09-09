@@ -1,0 +1,14 @@
+<template>
+    <template if:true={mentorRecord}>
+        <lightning-card title ={mentorRecord.Mentor__r.Name} icon-name="standard:user_role">
+            <div class="slds-var-m-around_small">
+                <h3><b>Mentor Name : </b> </h3> {mentorRecord.Mentor__r.Name} </br>
+                <h3><b>Mentor Department : </b> </h3> {mentorRecord.Name} </br>
+                <br>
+                <p class="slds-var-m-around_small">
+                    <lightning-button label="Assigned Employee" alternative-text="Open record" onclick={handleOpenRecord}></lightning-button>
+                </p>
+            </div>
+        </lightning-card>
+    </template>
+</template>
