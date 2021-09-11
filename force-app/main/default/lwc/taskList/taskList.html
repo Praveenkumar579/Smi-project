@@ -1,0 +1,32 @@
+<template>
+    <div class="slds-m-around_small">
+        <div class="slds-p-right_x-small">
+        <lightning-card title="Task List" icon-name="standard:task">
+    
+                <div>
+                    <template if:true={taskRecords}>
+                       
+                    <div class="slds-grid slds-wrap">
+                    
+                    <template for:each={taskRecords} for:item="item" >
+                        
+                            <div class="slds-col slds-size_1-of-5" key={item.Id}>
+                                <div class="slds-p-right_x-small">
+                                    <div class="slds-p-top_x-small">
+                                        <c-task-tile task-record={item}  data-value={item.Id} onclick={handleClick}></c-task-tile>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                  
+                    </div>
+                    </template>
+                
+                </div>
+            </lightning-card>
+            
+       
+        </div>
+    </div>
+    
+</template>

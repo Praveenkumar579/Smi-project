@@ -2,15 +2,20 @@
     <template if:true={employeeRecord}>
         <lightning-card title ={employeeRecord.Employee__r.Name} icon-name="action:user">
             <div class="slds-var-m-around_small">
+                
+                  <p align='center'><span  class="slds-avatar slds-avatar_profile-image-large">
+
+                      </span></p> <br/>
                 <p>
+                <Strong>Employee Id:  </Strong>{employeeRecord.Name}<br/>
                 <strong>Employee Name :  </strong> {employeeRecord.Employee__r.Name} </br>
                 <strong>Mentor :  </strong> {employeeRecord.Mentor__r.Name}<br/>
                 </p>
               
                 <br>
                 <p class="slds-var-m-around_small">
-                    <lightning-button label="Assigned Task"  alternative-text="Assigned Task" onclick={handleOpenRecordClick}></lightning-button>&nbsp;
-                    <a class="slds-button slds-button_neutral" href="/lightning/o/User_Assigned_Task__c/new?count=1&3D00B9D000002L6inUAC">Assign task</a>
+                    <lightning-button label="View Details" alternative-text="Open record" onclick={handleOpenRecordClick}></lightning-button>
+                    
                 </p>
             </div>
         </lightning-card>

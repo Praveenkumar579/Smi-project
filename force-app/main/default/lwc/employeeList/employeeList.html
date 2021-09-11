@@ -2,19 +2,33 @@
     <lightning-card>
         <div class="slds-m-around_small">
             <div>
-                <c-employee-search> onsearch={handleEvent} </c-employee-search>
                 </div>
                     <div>
-                    <template if:true={employeeRecords}>
+                    <lightning-card title ='Employee Details' icon-name="custom:custom15">
+                        <template if:true={employeeRecords}>
                         <div class="slds-grid slds-wrap">
-                            <template for:each={employeeRecords} for:item="item">
+                        <template for:each={employeeRecords} for:item="item">
+                                
                                 <div class="slds-col slds-size_1-of-3" key={item.Id}>
-                                    <c-employee-record employee-record={item} onemployeeview={handleEmployeeView}></c-employee-record>
+                                    <div class="slds-p-right_x-small">
+                                        <div class="slds-p-top_x-small">
+                                            <c-employee-data employee-record={item} onemployeeview={handleEmployeeView}></c-employee-data>
+                                        </div>
+                                    </div>
                                 </div>
                             </template>
                         </div>
-                    </template>
-                </div>
+    
+                        </template>
+                    </lightning-card> 
+                    
+                    </div>
+        </div>        
+        <p slot="footer"></p>   
+    </lightning-card> 
+    <lightning-card title="Assign Task" icon-name="action:new_task">
+        <div class="slds-m-top_small slds-m-bottom_medium" align='right'>
+            <a class="slds-button slds-button_brand" href="/lightning/o/User_Assigned_Task__c/new?count=1&3D00B9D000002L6inUAC">Assign task</a>
         </div>
     </lightning-card>
 </template>

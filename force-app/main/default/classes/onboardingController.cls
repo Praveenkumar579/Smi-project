@@ -1,10 +1,8 @@
 public with sharing class onboardingController {
-    public onboardingController() {
-    }
     @AuraEnabled(cacheable = true)
     public static List<Onboarding_Step__c> getList(){
         
-        List<Onboarding_Step__c> onboardingsteps = [Select Name FROM Onboarding_Step__c ];
+        List<Onboarding_Step__c> onboardingsteps = [Select Name, Duration__c, Duration_Type__c,Level__c, Onboarding_Step_Type__c FROM Onboarding_Step__c ];
         
         return onboardingsteps;
     }

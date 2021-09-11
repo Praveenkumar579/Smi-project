@@ -1,0 +1,21 @@
+<template>
+    <template if:true={taskRecord}>
+        <lightning-card title ={taskRecord.Name} icon-name="standard:task2">
+            <div class="slds-var-m-around_small">
+
+                <p>
+                <strong>TaskName :  </strong> {taskRecord.Name} </br>
+                <strong>Employee :  </strong> {taskRecord.Employee__r.Name} </br>
+                <strong>Status	 : </strong> {taskRecord.Status__c}
+                </p>
+                <lightning-output-field field-name="Status__c"></lightning-output-field>
+                <br>
+                <p class="slds-var-m-around_small">
+                    <lightning-output-field field-name="Status__c"></lightning-output-field>
+                    <lightning-button label="View Details" variant="brand" alternative-text="Open record" onclick={handleOpenRecord}></lightning-button>
+                </p>
+            </div>
+        </lightning-card>
+    </template>
+
+</template>

@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="View The Progress of Assigned Task" icon-name="standard:task">
+        <div class="slds-var-m-around_small">
+        <p class="slds-p-horizontal_small">
+                <lightning-record-form
+                    record-id={taskId}
+                    object-api-name={objectApiName}
+                    fields={fields}
+                    columns="1"
+                    mode="view">
+            </lightning-record-form>
+        </p>
+        </div>
+    </lightning-card>
+</template>

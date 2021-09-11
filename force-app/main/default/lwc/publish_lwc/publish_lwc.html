@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="Task List LWC">
+        <p class="slds-p-horizontal_small">
+            <template for:each={taskList} for:item="item">
+                <div key={item.Id}> 
+                    <a href="#"  data-value={item.Id} onclick={handleClick}>{item.Name}</a>
+                </div>
+            </template>
+        </p>
+    </lightning-card>
+</template>
