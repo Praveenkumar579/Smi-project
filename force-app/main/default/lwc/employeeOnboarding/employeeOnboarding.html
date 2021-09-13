@@ -1,0 +1,19 @@
+<template>
+    <template if:true={employeeRecord}>
+        <lightning-card title ={employeeRecord.Employee__r.Name} icon-name="action:user">
+            <div class="slds-var-m-around_small">
+                
+                  <p align='center'><span  class="slds-avatar slds-avatar_profile-image-large">
+
+                      </span></p> <br/>
+                <p>
+                <Strong>Employee Id:  </Strong>{employeeRecord.Name}<br/>
+                <strong>Employee Name :  </strong> {employeeRecord.Employee__r.Name} </br>
+                <strong>Mentor :  </strong> {employeeRecord.Mentor__r.Name}<br/>
+                </p>
+              
+                <br>
+            </div>
+        </lightning-card>
+    </template>
+</template>

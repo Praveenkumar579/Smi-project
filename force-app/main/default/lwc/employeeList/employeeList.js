@@ -1,9 +1,14 @@
 import { NavigationMixin } from 'lightning/navigation';
-import { LightningElement, track, wire } from 'lwc';
+import { LightningElement, api, track, wire } from 'lwc';
+import getOpportunities from "@salesforce/apex/OnboardingExtend.getList";
 import searchEmployee from '@salesforce/apex/employeeController.searchEmployee';
-export default class EmployeeList extends NavigationMixin(LightningElement) {
+export default class EmployeeList extends LightningElement {
     @track employeeRecords;
+    @api recordId;
     @track errors;
+    @wire(getOpportunities, {})
+    opportunities;
+    @api taskRecord;
 
     @wire(searchEmployee)
         wiredRecords({error, data}){
@@ -35,21 +40,42 @@ export default class EmployeeList extends NavigationMixin(LightningElement) {
             this.employeeRecords = undefined;
             
         })
+   
     }
 
-     handleEmployeeView(event) {
+    handleEmployeeView(event) {
+        const employeeId = event.detail;
 		
-		const employeeName = event.detail.value;
 		
 		this[NavigationMixin.Navigate]({
-			type: 'standard__recordPage',
+			type: 'standard__objectPage',
 			attributes: {
-				recordId: employeeName,
-				objectApiName: 'User_Functional_Role__c',
-				actionName: 'view',
-			},
+				recordId: employeeId,
+				objectApiName: 'User_Assigned_Task__c',
+				actionName: 'list',
+			}
 		});
 	}
+    handleRowAction(event) {
+        if (event.detail.action.name === "closeopportunity") {
+            this[NavigationMixin.Navigate]({
+                type: "standard__recordPage",
+                attributes: {
+                    recordId: event.detail.row.Id,
+                    actionName: "edit"
+                }
+            });
+    }
+}
+    @api objectApiStep = "Onboarding_Step__c";
 
-
+    handleSuccess(){
+        const toast = new ShowToastEvent({
+            'title' : 'Created',
+            "message" : 'Record Created Successfully',
+            "variant" : "success",
+            
+        });
+        this.dispatchEvent(toast);
+    }
 }
