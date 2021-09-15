@@ -1,6 +1,6 @@
 import { NavigationMixin } from 'lightning/navigation';
 import { LightningElement, track, wire } from 'lwc';
-import getAssigendTask from '@salesforce/apex/taskController.getAssigendTask';
+import getAssigendTask from '@salesforce/apex/TaskMentor.getAssigendTask';
 import { createMessageContext, releaseMessageContext,publish} from 'lightning/messageService';
 import SAMPLEMC from "@salesforce/messageChannel/SampleMessageChannel__c";
 
